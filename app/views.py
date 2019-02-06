@@ -47,6 +47,19 @@ def add_header(response):
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
 
+from flask import Flask
+app=Flask(__name__)
+
+import datetime
+def format_date_joined(gdate):
+    date_joined = datetime.date(gdate) 
+    return "Joined " + date_joined.strftime("%B, %Y") 
+
+@app.route("/profile")
+def profile():
+    format_date_joined(datetime.datetime.now())
+    return "List of profiles"
+
 
 @app.errorhandler(404)
 def page_not_found(error):
